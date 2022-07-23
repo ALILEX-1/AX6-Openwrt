@@ -8,3 +8,7 @@
 
 A template for building OpenWrt with GitHub Actions
 
+
+Credits
+
+https://github.com/hnyyghk/AX6-Actions-OpenWrt
