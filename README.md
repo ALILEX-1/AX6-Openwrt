@@ -9,6 +9,8 @@
 A template for building OpenWrt with GitHub Actions
 
 
-Credits
+## Credits
 
-https://github.com/hnyyghk/AX6-Actions-OpenWrt
+- [hnyyghk]([https://azure.microsoft.com](https://github.com/hnyyghk/AX6-Actions-OpenWrt))
+
+
