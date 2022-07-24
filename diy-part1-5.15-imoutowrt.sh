@@ -9,7 +9,7 @@
 # File name: diy-part1-5.15-imoutowrt.sh
 # Description: OpenWrt DIY script part 1 (Before Update feeds)
 #
-
+#upnp无法运行
 # Uncomment a feed source
 #sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
 
