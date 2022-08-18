@@ -22,7 +22,6 @@ echo 'src-git kenzo https://github.com/kenzok8/small-package' >> feeds.conf.defa
 #echo 'src-git Boos https://github.com/Boos4721/OpenWrt-Packages' >> feeds.conf.default
 echo 'src-link custom /workdir/openwrt/custom-feed' >> feeds.conf.default
 echo 'src-git kenzo https://github.com/kenzok8/openwrt-packages' >> feeds.conf.default
-echo 'src-git small https://github.com/kenzok8/small' >> feeds.conf.default
 
 
 mkdir -p package/helloworld
