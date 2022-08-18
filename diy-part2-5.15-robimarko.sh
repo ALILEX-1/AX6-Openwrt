@@ -74,10 +74,8 @@ DDNS_PASSWORD=""
 SSR_SUBSCRIBE_URL=""
 SSR_SAVE_WORDS=""
 SSR_GLOBAL_SERVER=""
-
 refresh_ad_conf() {
     sleep 30
-
     # 检查拦截列表
     # grep -v "\."                     /etc/smartdns/ad.conf
     # grep "address /api.xiaomi.com/#" /etc/smartdns/ad.conf
@@ -278,10 +276,8 @@ EOF
     /etc/init.d/smartdns restart >> /etc/custom.tag 2>&1
     echo "smartdns block ad domain list finish" >> /etc/custom.tag
 }
-
 init_custom_config() {
     sleep 30
-
     uci set network.wan.proto='pppoe'
     uci set network.wan.username="\${PPPOE_USERNAME}"
     uci set network.wan.password="\${PPPOE_PASSWORD}"
@@ -297,13 +293,10 @@ init_custom_config() {
     uci commit network
     /etc/init.d/network restart >> /etc/custom.tag 2>&1
     echo "network finish" >> /etc/custom.tag
-
     sleep 30
-
     # hijack dns queries to router(firewall4)
     # 把局域网内所有客户端对外ipv4和ipv6的53端口查询请求，都劫持指向路由器(nft list chain inet fw4 dns-redirect)(nft delete chain inet fw4 dns-redirect)
     cat >> /etc/nftables.d/10-custom-filter-chains.nft << EOF
-
 chain dns-redirect {
     type nat hook prerouting priority -105;
     udp dport 53 counter redirect to :53
@@ -314,14 +307,12 @@ EOF
     uci commit firewall
     /etc/init.d/firewall restart >> /etc/custom.tag 2>&1
     echo "firewall finish" >> /etc/custom.tag
-
     uci set ttyd.cfg01a8ea.ssl='1'
     uci set ttyd.cfg01a8ea.ssl_cert='/etc/nginx/conf.d/_lan.crt'
     uci set ttyd.cfg01a8ea.ssl_key='/etc/nginx/conf.d/_lan.key'
     uci commit ttyd
     /etc/init.d/ttyd restart >> /etc/custom.tag 2>&1
     echo "ttyd finish" >> /etc/custom.tag
-
     uci set autoreboot.cfg01f8be.enable='1'
     uci set autoreboot.cfg01f8be.week='7'
     uci set autoreboot.cfg01f8be.hour='3'
@@ -329,9 +320,7 @@ EOF
     uci commit autoreboot
     /etc/init.d/autoreboot restart >> /etc/custom.tag 2>&1
     echo "autoreboot finish" >> /etc/custom.tag
-
     sleep 30
-
     uci set smartdns.cfg016bb1.enabled='1'
     uci set smartdns.cfg016bb1.server_name='smartdns'
     uci set smartdns.cfg016bb1.port='6053'
@@ -367,11 +356,8 @@ EOF
     uci commit smartdns
     touch /etc/smartdns/ad.conf
     cat >> /etc/smartdns/custom.conf << EOF
-
-
 # Include another configuration options
 conf-file /etc/smartdns/ad.conf
-
 # remote dns server list
 server 114.114.114.114 -group china #114DNS
 server 114.114.115.115 -group china #114DNS
@@ -399,9 +385,7 @@ server-https https://doh.opendns.com/dns-query -group oversea -exclude-default-g
 EOF
     /etc/init.d/smartdns restart >> /etc/custom.tag 2>&1
     echo "smartdns remote dns server list finish" >> /etc/custom.tag
-
     sleep 30
-
     uci set ddns.test=service
     uci set ddns.test.service_name='cloudflare.com-v4'
     uci set ddns.test.use_ipv6='1'
@@ -420,7 +404,6 @@ EOF
     uci commit ddns
     /etc/init.d/ddns restart >> /etc/custom.tag 2>&1
     echo "ddns finish" >> /etc/custom.tag
-
     echo "cloudflare-dns.com" >> /etc/ssrplus/black.list
     echo "dns.google" >> /etc/ssrplus/black.list
     echo "doh.opendns.com" >> /etc/ssrplus/black.list
@@ -443,7 +426,6 @@ EOF
     uci commit shadowsocksr
     /etc/init.d/shadowsocksr restart >> /etc/custom.tag 2>&1
     echo "shadowsocksr finish" >> /etc/custom.tag
-
     # crontab -l 查看计划表
     # mkdir -p /data/5icodes.com/test./cert
     # /usr/lib/acme/acme.sh --home "/etc/acme" --install-cert -d test.5icodes.com --key-file /data/5icodes.com/test./cert/_lan.key --fullchain-file /data/5icodes.com/test./cert/_lan.crt --reloadcmd "service nginx reload"
@@ -464,10 +446,8 @@ EOF
     uci commit acme
     /etc/init.d/acme restart >> /etc/custom.tag 2>&1
     echo "acme finish" >> /etc/custom.tag
-
     refresh_ad_conf
 }
-
 if [ -f "/etc/custom.tag" ]; then
     echo "smartdns block ad domain list start" > /etc/custom.tag
     refresh_ad_conf &
@@ -475,9 +455,7 @@ else
     echo "init custom config start" > /etc/custom.tag
     init_custom_config &
 fi
-
 echo "rc.local finish" >> /etc/custom.tag
-
 exit 0
 EOFEOF
 
