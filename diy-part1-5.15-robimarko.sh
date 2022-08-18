@@ -21,6 +21,9 @@ echo 'src-git kenzo https://github.com/kenzok8/small-package' >> feeds.conf.defa
 #echo 'src-git lienol https://github.com/Lienol/openwrt-package' >> feeds.conf.default
 #echo 'src-git Boos https://github.com/Boos4721/OpenWrt-Packages' >> feeds.conf.default
 echo 'src-link custom /workdir/openwrt/custom-feed' >> feeds.conf.default
+echo 'src-git kenzo https://github.com/kenzok8/openwrt-packages' >> feeds.conf.default
+echo 'src-git small https://github.com/kenzok8/small' >> feeds.conf.default
+
 
 mkdir -p package/helloworld
 for i in "dns2socks" "microsocks" "ipt2socks" "redsocks2"; do \
