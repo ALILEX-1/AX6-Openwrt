@@ -3,7 +3,7 @@
 # Actions-OpenWrt For  AX6
 
 > 这个仓库基于[P3TERX/Actions-OpenWrt](https://github.com/P3TERX/Actions-OpenWrt)<br>
-> OpenWRT分支来自[robimarko/openwrt](https://github.com/robimarko/openwrt/tree/ipq807x-5.15)<br>
+> OpenWRT分支来自[robimarko/openwrt](https://github.com/robimarko/openwrt/tree/ipq807x-5.15-pr)<br>
 > OpenWRT第二分支来自[imoutowrt/openwrt](https://github.com/1715173329/imoutowrt)<br>
 > LEDE分支来自[lede/openwrt](https://www.right.com.cn/forum/forum.php?mod=viewthread&tid=5796487&extra=page%3D1%26filter%3Dtypeid%26typeid%3D64)<br>
 
